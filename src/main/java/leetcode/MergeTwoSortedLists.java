@@ -250,6 +250,7 @@ public class MergeTwoSortedLists {
             listNode2.next = merge(listNode2.next, listNode1);
             return listNode2;
         } else {
+            // 大于等于的case
             listNode1.next = merge(listNode1.next, listNode2);
             return listNode1;
         }

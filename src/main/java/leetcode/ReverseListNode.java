@@ -107,31 +107,30 @@ public class ReverseListNode {
         listNode3.next = listNode4;
         listNode4.next = listNode5;
 
-        System.out.println(reverseList3(listNode1));
+        ListNode listNode = reverseList3(listNode1);
+        System.out.println(listNode);
     }
 
     /**
      * 核心思想：
-     * 1、遍历链表
-     * 2、为每个遍历的链表的val构建成一个新对象
-     * 3、用一个container来存储反转后的链表。
-     * 4、宗旨为修改引用
+     * // 思路：
+     *         // 1、启动一个空节点。用来存储反转后的链表
+     *         // 2、遍历链表，每次遍历的过程中，把value构建成一个新的链表节点
+     *         // 3、在遍历逻辑中：相当于就是把新节点拼接在空节点后面，完成反转操作
+     *         // 4、最后再把反转后的链表赋值给空节点
      * @param head
      * @return
      */
     private static ListNode reverseList3(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+
         ListNode container = null;
-
         while (head != null) {
-            if (container == null) {
-                container = new ListNode(head.val);
-            } else {
-                ListNode tmp = new ListNode(head.val);
-                tmp.next = container;
-
-                // 将已经反转后的节点复制给container，最终的container就是反转后的链表
-                container = tmp;
-            }
+            ListNode currentNode = new ListNode(head.val);
+            currentNode.next = container;
+            container = currentNode;
 
             head = head.next;
         }
