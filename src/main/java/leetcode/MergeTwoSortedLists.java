@@ -32,7 +32,8 @@ public class MergeTwoSortedLists {
 
         // System.out.println(merge(l11, l21));
         // System.out.println(iterate(l11, l21));
-        System.out.println(merged(l11, l21));
+        ListNode merged = merged(l11, l21);
+        System.out.println(merged);
     }
 
     /**
@@ -245,7 +246,8 @@ public class MergeTwoSortedLists {
         } else if (listNode2 == null) {
             return listNode1;
         } else if (listNode1.val > listNode2.val) {
-            listNode2.next = merge(listNode1, listNode2.next);
+            // 2 > 1  ==> 2要放在1后面。  所以为listNode2.next = merge(listNode2.next, listNode1)
+            listNode2.next = merge(listNode2.next, listNode1);
             return listNode2;
         } else {
             listNode1.next = merge(listNode1.next, listNode2);
