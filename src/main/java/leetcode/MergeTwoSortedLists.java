@@ -241,19 +241,22 @@ public class MergeTwoSortedLists {
      * @param listNode2
      */
     public static ListNode merged(ListNode listNode1, ListNode listNode2) {
+        if (listNode2 == null) {
+            return listNode1;
+        }
+
         if (listNode1 == null) {
             return listNode2;
-        } else if (listNode2 == null) {
-            return listNode1;
-        } else if (listNode1.val > listNode2.val) {
-            // 2 > 1  ==> 2要放在1后面。  所以为listNode2.next = merge(listNode2.next, listNode1)
-            listNode2.next = merge(listNode2.next, listNode1);
+        }
+
+        if (listNode1.val > listNode2.val) {
+            listNode2.next = merge(listNode1, listNode2.next);
             return listNode2;
         } else {
-            // 大于等于的case
             listNode1.next = merge(listNode1.next, listNode2);
             return listNode1;
         }
+
     }
 
 }

@@ -126,16 +126,19 @@ public class ReverseListNode {
             return head;
         }
 
-        ListNode container = null;
+        ListNode tmp = null;
         while (head != null) {
-            ListNode currentNode = new ListNode(head.val);
-            currentNode.next = container;
-            container = currentNode;
+            // 这两段代码，就是链表的拼接
+            ListNode inner = new ListNode(head.val);
+            inner.next = tmp;
+
+            // 把最新的链表节点赋值为tmp
+            tmp = inner;
 
             head = head.next;
         }
 
-        return container;
+        return tmp;
     }
 
 
