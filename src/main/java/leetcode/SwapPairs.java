@@ -176,6 +176,62 @@ public class SwapPairs {
         return res.next;
     }
 
+    /**
+     * dummy -> 1 -> 2 -> 3 -> 4
+     * prev = dummy
+     *
+     * 第一步：交换 1 和 2
+     * first = 1, second = 2
+     * 修改指针：
+     * prev.next = second → dummy -> 2
+     * first.next = second.next → 1 -> 3
+     * second.next = first → 2 -> 1
+     * 结果链表：dummy -> 2 -> 1 -> 3 -> 4
+     * 更新 prev = first → prev = 1
+     *
+     * 第二步：交换 3 和 4
+     * first = 3, second = 4
+     * 修改指针：
+     * prev.next = second → 1 -> 4
+     * first.next = second.next → 3 -> null
+     * second.next = first → 4 -> 3
+     * 结果链表：dummy -> 2 -> 1 -> 4 -> 3
+     * 更新 prev = first → prev = 3
+     *
+     * 结束循环：
+     * prev.next == null 或 prev.next.next == null，退出循环。
+     *
+     * 返回结果：
+     * 返回 dummy.next，即 2 -> 1 -> 4 -> 3。
+     * @param head
+     * @return
+     */
+    public static ListNode swapPairs4Final(ListNode head) {
+        // 创建一个虚拟头节点
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        // prev 指向当前要交换的两个节点的前一个节点
+        ListNode prev = dummy;
+
+        while (prev.next != null && prev.next.next != null) {
+            // 找到要交换的两个节点
+            ListNode first = prev.next;
+            ListNode second = first.next;
+
+            // 修改指针，完成交换
+            prev.next = second;       // prev 指向 second
+            first.next = second.next; // first 指向 second 的下一个节点
+            second.next = first;      // second 指向 first
+
+            // 移动 prev 到交换后的第二个节点
+            prev = first;
+        }
+
+        // 返回新的链表头
+        return dummy.next;
+    }
+
 
     public static void main(String[] args) {
         ListNode node4 = new ListNode(4);
