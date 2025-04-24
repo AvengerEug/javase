@@ -67,27 +67,23 @@ public class HasCycle {
     public static boolean hasCycle2(ListNode head) {
 
         if (head == null || head.next == null) {
-            return false;
+            return false; // 空链表或只有一个节点时，不可能有环
         }
 
-        ListNode fast = head;
-        ListNode slow = head;
+        ListNode slow = head; // 慢指针
+        ListNode fast = head; // 快指针
 
-        while (head.next != null) {
-            // 快指针走两步
-            fast = fast.next.next;
+        // 遍历快指针
+        while (fast != null && fast.next != null) {
+            slow = slow.next;           // 慢指针走一步
+            fast = fast.next.next;      // 快指针走两步
 
-            // 慢指针走一步
-            slow = slow.next;
-
-            if (fast.hashCode() == slow.hashCode()) {
+            if (slow == fast) {         // 如果快慢指针相遇，说明有环
                 return true;
             }
-
-            head = head.next;
         }
 
-        return false;
+        return false; // 快指针到达链表末尾，说明无环
     }
 
 
