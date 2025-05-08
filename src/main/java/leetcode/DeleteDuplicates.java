@@ -34,7 +34,7 @@ public class DeleteDuplicates {
      * @return
      */
     public static ListNode deleteDuplForHash(ListNode root) {
-        Map<Integer, Integer> hash = new HashMap<>();
+        Map<Integer, Integer> hash = new LinkedHashMap<>();
 
         while (root != null) {
             if (hash.containsKey(root.val)) {
@@ -137,6 +137,6 @@ public class DeleteDuplicates {
         node44.next = node55;
 
         //System.out.println(deleteDuplForHash(node1));
-        System.out.println(deleteDupl(node1));
+        System.out.println(deleteDuplForHash(node1));
     }
 }

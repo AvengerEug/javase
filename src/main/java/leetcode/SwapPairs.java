@@ -207,24 +207,24 @@ public class SwapPairs {
      * @return
      */
     public static ListNode swapPairs4Final(ListNode head) {
-        // 创建一个虚拟头节点
+        // 抓head前创建一个虚拟头节点
         ListNode dummy = new ListNode(0);
         dummy.next = head;
 
         // prev 指向当前要交换的两个节点的前一个节点
         ListNode prev = dummy;
-
+        // 这里很重要，遍历的是pre
         while (prev.next != null && prev.next.next != null) {
             // 找到要交换的两个节点
             ListNode first = prev.next;
-            ListNode second = first.next;
+            ListNode second = prev.next.next;
 
             // 修改指针，完成交换
             prev.next = second;       // prev 指向 second
             first.next = second.next; // first 指向 second 的下一个节点
             second.next = first;      // second 指向 first
 
-            // 移动 prev 到交换后的第二个节点
+            // 移动 prev 到交换后的第二个节点。方便下一次遍历，处理后面的两个节点
             prev = first;
         }
 
@@ -242,7 +242,7 @@ public class SwapPairs {
         node2.next = node3;
         node1.next = node2;
 
-        System.out.println(swapPairs3(node1));
+        System.out.println(swapPairs4Final(node1));
     }
 
 }
